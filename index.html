@@ -6,8 +6,15 @@
     <title>Madhu Sudan Ghimire | Finance Professional</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="preload" href="assets/calm-music.mp3" as="audio">
 </head>
 <body>
+
+
+    <audio id="bgMusic" loop>
+        <source src="assets/music.mp3" type="audio/mpeg">
+      </audio>
+
     <!-- Header -->
     <header>
         <div class="container nav-container">
@@ -330,6 +337,42 @@
 
         // Trigger initial animation
         window.dispatchEvent(new Event('scroll'));
+
+
+
+
+
+
+
+
+
+        //Music
+       
+        // Unmute and play as soon as possible
+  document.addEventListener('DOMContentLoaded', () => {
+    const music = document.getElementById('bgMusic');
+    music.volume = 0.08; // 20% volume
+    
+    // Try unmuting immediately
+    const attemptPlay = () => {
+      music.muted = false;
+      music.play().then(() => {
+        console.log("Music playing!");
+      }).catch(e => {
+        console.log("Autoplay blocked, waiting for interaction");
+        // Fallback: Play after first click
+        document.body.addEventListener('click', () => {
+          music.play();
+        }, { once: true });
+      });
+    };
+
+    // First attempt
+    attemptPlay();
+    
+    // Retry after 1 second if needed
+    setTimeout(attemptPlay, 1000);
+  });
     </script>
 </body>
 </html>
